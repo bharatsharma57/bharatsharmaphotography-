@@ -1,0 +1,17 @@
+$uname=$_POST['name'];
+$uemail=$_POST['email'];
+$uphone=$_POST['phone'];
+$ucomment=$_POST['comment'];
+
+$conn=new mysqli('localhost','root','','photography');
+if($conn->connect_error){
+die("connection failed".$conn->connect_error);}
+else{
+$stmt=$conn->prepare("insert into queries(name,email,phone,comment) values(?,?,?,?)");
+$stmt->bind_param("ssss",$name,$email,$phone,$comment);
+$stmt->execute();
+$stmt->close();
+echo "Submited Successfully...";
+$stmt->close();
+$conn->close();
+}
